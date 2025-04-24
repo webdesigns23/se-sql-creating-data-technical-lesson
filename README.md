@@ -77,7 +77,7 @@ cur.execute("""
 
 ### Step 3: Add data (INSERT).
 
-Once your table is created in the database, we can add some data using `INSERT INTO`:
+Once your table is created in the database, we can add some data using `INSERT INTO` and committing your data changes to the database:
 
 ```python
 cur.execute("""
@@ -86,9 +86,11 @@ cur.execute("""
         ('Sofia Ramirez', 'sofia.ramirez@example.com'),
         ('Devon Blake', 'devon.blake@example.com');
 """)
+
+conn.commit()
 ```
 
-You can now run the file. Again, the above command needs to be run only once, if you run it more, it will duplicate your data.
+You can now run the file. Again, the above command needs to be run only once, if you run it more, it will duplicate your data. Note, for insert statements, we need to use `conn.commit()`. If you run it without commiting your new data to the database, the changes won't be persisted.
 
 We'll discuss the below command further in the next section, but for now, add the code below and run the file to see your data:
 
@@ -101,7 +103,7 @@ The code above doesn't alter data in the table, and thus can be run as many time
 
 ### Step 4: Modify data (UPDATE).
 
-Let’s say Devon updated their email address. You can reflect this change with an `UPDATE`:
+Let’s say Devon updated their email address. You can reflect this change with an `UPDATE` and commit:
 
 ```python
 cur.execute("""
@@ -109,6 +111,8 @@ cur.execute("""
     SET email = 'devon.blake@newdomain.com'
     WHERE email = 'devon.blake@example.com';
 """)
+
+conn.commit()
 ```
 
 Always include a `WHERE` clause when using UPDATE, or you might update every row in the table. When using `WHERE` to get 1 specific individual, always use a unique identifier such as an id. 
@@ -125,6 +129,8 @@ cur.execute("""
     VALUES 
         ('Test User', 'test@test.com');
 """)
+
+conn.commit()
 ```
 
 After running the code above and commenting it out, feel free to run the code from step 3 to see the bad data now in the database:
@@ -134,13 +140,15 @@ cur.execute("""SELECT * FROM users;""")
 print(cur.fetchall())
 ```
 
-We can remove that data with `DELETE FROM`.
+We can remove that data with `DELETE FROM`. Don't forget to commit the changes as well.
 
 ```python
 cur.execute("""
     DELETE FROM users
     WHERE name = 'Test User';
 """)
+
+conn.commit()
 ```
 
 You can run the code from step 3 again after running the `DELETE FROM` query and commenting it out. You should see the Test User now gone:
