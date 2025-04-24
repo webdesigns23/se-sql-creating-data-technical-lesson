@@ -117,7 +117,7 @@ conn.commit()
 
 Always include a `WHERE` clause when using UPDATE, or you might update every row in the table. When using `WHERE` to get 1 specific individual, always use a unique identifier such as an id. 
 
-For example, imagine you have two Jane Does in your database. One has an id of 15 and the other 30. Jane Doe with an id of 30 wants to close her account. If you specify by name, you'll accidentally delete both Jane Doe accounts, which could be disasterous. If you specify by id = 30, you'll know you will only delete the correct account.
+For example, imagine you have two Jane Does in your database. One has an id of 15 and the other 30. Jane Doe with an id of 30 wants to close her account. If you specify by name, you'll accidentally delete both Jane Doe accounts, which could be disastrous. If you specify by id = 30, you'll know you will only delete the correct account.
 
 ### Step 5: Remove unnecessary data (DELETE).
 
